@@ -5,9 +5,9 @@ and the complete Streamlit workflow without requiring hosted services for the de
 
 ## Verification result
 
-The Phase 17 checkpoint collects **178 tests**:
+The Phase 17 checkpoint collects **179 tests**:
 
-- **167 passed** in the offline/default environment.
+- **168 passed** in the offline/default environment.
 - **11 skipped** because live PostgreSQL or pgvector was unavailable.
 - **82.03% total branch-aware package coverage**, above the enforced 80% floor.
 - Ruff and `pip check` pass.
@@ -70,7 +70,7 @@ python -m pip check
 
 Two tests in `tests/test_database_integration.py` require
 `SENTINEL_TEST_DATABASE_URL`. Nine SQL reconciliation tests use the configured local PostgreSQL
-database and skip as a group when it is unavailable. To exercise all 178 tests, start and seed
+database and skip as a group when it is unavailable. To exercise all 179 tests, start and seed
 PostgreSQL, enable pgvector, configure the test URL, and rerun the suite.
 
 No default test sends requests to OpenAI. Hosted clients are replaced with deterministic fakes, and

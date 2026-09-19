@@ -62,7 +62,7 @@ The Streamlit interface guides a user through business question, structured inte
 
 ## Results and Evaluation
 
-Phase 17 collects 178 tests: 167 pass offline and 11 optional PostgreSQL/pgvector checks skip when local services are unavailable. Branch-aware package coverage is 82.03% against an enforced 80% floor. Validation covers deterministic generation, relational integrity, accounting identities, SQL/Pandas reconciliation, statistics, end-to-end leakage-safe ML, anomaly detection, chronological forecasting, Plotly contracts, bounded orchestration, retrieval citations and resource disposal, evidence IDs, numerical grounding, causal-language rejection, qualitative confidence, structured narration, report rendering, Streamlit state transitions, and offline audit-tool behavior. See [Testing and Coverage](docs/testing.md).
+Phase 17 collects 179 tests: 168 pass offline and 11 optional PostgreSQL/pgvector checks skip when local services are unavailable. Branch-aware package coverage is 82.03% against an enforced 80% floor. Validation covers deterministic generation, relational integrity, accounting identities, SQL/Pandas reconciliation, statistics, end-to-end leakage-safe ML, anomaly detection, chronological forecasting, Plotly contracts, bounded orchestration, retrieval citations and resource disposal, evidence IDs, numerical grounding, causal-language rejection, qualitative confidence, structured narration, report rendering, Streamlit state transitions, and offline audit-tool behavior. See [Testing and Coverage](docs/testing.md).
 
 ## Limitations
 
