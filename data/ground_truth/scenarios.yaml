@@ -1,0 +1,31 @@
+# EVALUATION ONLY. Runtime application code must never read this file.
+metadata:
+  company: AMX Tech
+  generator_seed: 42
+  inference_access: forbidden
+  observation_window: 2023-01-01/2024-12-31
+scenarios:
+  - id: profit_decline_q2_2024
+    period: 2024-04-01/2024-06-30
+    primary_driver: elevated GPU infrastructure costs
+    secondary_driver: increased Enterprise discounts
+    expected_language: contribution declined despite underlying revenue growth
+  - id: europe_churn_increase
+    period: 2024-04-01/2024-06-30
+    segment: Europe Professional
+    signals: [longer support resolution, lower satisfaction, higher cancellation probability]
+    causal_claim_allowed: false
+  - id: cloud_gpu_anomaly
+    period: 2024-05-13/2024-05-19
+    metric: gpu_cost
+    expected_strength: strong
+  - id: enterprise_discounting
+    period: 2024-04-01/2024-06-30
+    segment: Enterprise
+    effect: gross revenue grows faster than net revenue
+  - id: professional_plan_churn
+    segment: Professional
+    predictive_signals: [low satisfaction, high support volume, longer resolution, short tenure]
+  - id: revenue_forecast_structure
+    metric: monthly net revenue
+    components: [positive trend, annual seasonality, random noise]
