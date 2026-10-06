@@ -1,0 +1,547 @@
+{
+  "company": "AMX Tech",
+  "snapshot": {
+    "snapshot_date": "2024-03-31",
+    "prediction_end_date": "2024-12-31",
+    "trailing_window_days": 180,
+    "target_definition": "Customer has an eligible subscription active at snapshot that is cancelled after snapshot and on or before prediction end."
+  },
+  "training_configuration": {
+    "random_state": 42,
+    "test_size": 0.2,
+    "cross_validation_folds": 5,
+    "tuning_iterations": 12,
+    "minimum_recall": 0.7
+  },
+  "cohort": {
+    "customers": 3288,
+    "churners": 319,
+    "churn_rate": 0.09701946472019465,
+    "training_customers": 2630,
+    "test_customers": 658,
+    "training_churn_rate": 0.09695817490494296,
+    "test_churn_rate": 0.0972644376899696
+  },
+  "features": {
+    "categorical": [
+      "region",
+      "industry",
+      "company_size",
+      "acquisition_channel",
+      "primary_plan"
+    ],
+    "numeric": [
+      "customer_tenure_days",
+      "active_subscription_count",
+      "monthly_contract_value",
+      "total_seats",
+      "historical_renewals",
+      "days_to_renewal",
+      "historical_net_revenue",
+      "trailing_net_revenue",
+      "average_historical_revenue",
+      "historical_discount_rate",
+      "sales_observation_count",
+      "total_support_tickets",
+      "trailing_support_tickets",
+      "average_resolution_hours",
+      "average_satisfaction",
+      "satisfaction_response_rate",
+      "has_support_history",
+      "is_enterprise"
+    ],
+    "leakage_exclusions": [
+      "customer_status at dataset end",
+      "subscription_status as of dataset end",
+      "subscription end dates as predictive features",
+      "sales or tickets after snapshot",
+      "ground-truth scenario metadata"
+    ]
+  },
+  "cross_validation": {
+    "dummy": {
+      "average_precision": {
+        "mean": 0.09695817490494296,
+        "std": 0.0
+      },
+      "roc_auc": {
+        "mean": 0.5,
+        "std": 0.0
+      },
+      "recall": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "f1": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "logistic_regression": {
+      "average_precision": {
+        "mean": 0.5244846498326494,
+        "std": 0.10555581967802238
+      },
+      "roc_auc": {
+        "mean": 0.8876284829721361,
+        "std": 0.024903453770299303
+      },
+      "recall": {
+        "mean": 0.780392156862745,
+        "std": 0.008768894029410957
+      },
+      "precision": {
+        "mean": 0.3459344566352034,
+        "std": 0.03377406907572012
+      },
+      "f1": {
+        "mean": 0.4785862467546176,
+        "std": 0.03347658222070447
+      }
+    },
+    "random_forest": {
+      "average_precision": {
+        "mean": 0.6708201814233562,
+        "std": 0.04583835788629287
+      },
+      "roc_auc": {
+        "mean": 0.9124127966976264,
+        "std": 0.03458377129382135
+      },
+      "recall": {
+        "mean": 0.5843137254901961,
+        "std": 0.06562039423796671
+      },
+      "precision": {
+        "mean": 0.6766383509397602,
+        "std": 0.04034545232390667
+      },
+      "f1": {
+        "mean": 0.6248523495902342,
+        "std": 0.03721041173376957
+      }
+    },
+    "gradient_boosting": {
+      "average_precision": {
+        "mean": 0.6979368372668631,
+        "std": 0.03798998791423702
+      },
+      "roc_auc": {
+        "mean": 0.9265221878224974,
+        "std": 0.023683398858770185
+      },
+      "recall": {
+        "mean": 0.6823529411764706,
+        "std": 0.046813083867895386
+      },
+      "precision": {
+        "mean": 0.6105699472940852,
+        "std": 0.048987364400806414
+      },
+      "f1": {
+        "mean": 0.6436245837020935,
+        "std": 0.041750781260896395
+      }
+    }
+  },
+  "selection_metric": "average_precision",
+  "selection_protocol": "Candidate selection, tuning, and threshold selection use training data only. The held-out test set is evaluated once after these choices are fixed.",
+  "baseline_cross_validation_average_precision": 0.09695817490494296,
+  "selected_model": "gradient_boosting",
+  "tuning": {
+    "best_parameters": {
+      "classifier__min_samples_leaf": 10,
+      "classifier__max_leaf_nodes": 15,
+      "classifier__max_iter": 120,
+      "classifier__learning_rate": 0.05,
+      "classifier__l2_regularization": 0.0
+    },
+    "best_cross_validation_average_precision": 0.7044372002199141,
+    "candidates_evaluated": 12
+  },
+  "threshold_selection": {
+    "source": "out-of-fold training predictions",
+    "minimum_recall": 0.7,
+    "selected_threshold": 0.5907121140621676
+  },
+  "held_out_test_metrics": {
+    "threshold": 0.5907121140621676,
+    "accuracy": 0.9361702127659575,
+    "precision": 0.6410256410256411,
+    "recall": 0.78125,
+    "f1": 0.704225352112676,
+    "roc_auc": 0.9436026936026937,
+    "average_precision": 0.7742779629822408,
+    "confusion_matrix": {
+      "true_negative": 566,
+      "false_positive": 28,
+      "false_negative": 14,
+      "true_positive": 50
+    }
+  },
+  "held_out_default_threshold_metrics": {
+    "threshold": 0.5,
+    "accuracy": 0.9224924012158054,
+    "precision": 0.5714285714285714,
+    "recall": 0.8125,
+    "f1": 0.6709677419354839,
+    "roc_auc": 0.9436026936026937,
+    "average_precision": 0.7742779629822408,
+    "confusion_matrix": {
+      "true_negative": 555,
+      "false_positive": 39,
+      "false_negative": 12,
+      "true_positive": 52
+    }
+  },
+  "untuned_candidate_test_metrics": {
+    "dummy": {
+      "threshold": 0.5,
+      "accuracy": 0.9027355623100304,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "roc_auc": 0.5,
+      "average_precision": 0.0972644376899696,
+      "confusion_matrix": {
+        "true_negative": 594,
+        "false_positive": 0,
+        "false_negative": 64,
+        "true_positive": 0
+      }
+    },
+    "logistic_regression": {
+      "threshold": 0.5,
+      "accuracy": 0.8465045592705167,
+      "precision": 0.37748344370860926,
+      "recall": 0.890625,
+      "f1": 0.5302325581395348,
+      "roc_auc": 0.914430765993266,
+      "average_precision": 0.5736893111741552,
+      "confusion_matrix": {
+        "true_negative": 500,
+        "false_positive": 94,
+        "false_negative": 7,
+        "true_positive": 57
+      }
+    },
+    "random_forest": {
+      "threshold": 0.5,
+      "accuracy": 0.9376899696048632,
+      "precision": 0.7090909090909091,
+      "recall": 0.609375,
+      "f1": 0.6554621848739496,
+      "roc_auc": 0.9323179713804715,
+      "average_precision": 0.7451872452358813,
+      "confusion_matrix": {
+        "true_negative": 578,
+        "false_positive": 16,
+        "false_negative": 25,
+        "true_positive": 39
+      }
+    },
+    "gradient_boosting": {
+      "threshold": 0.5,
+      "accuracy": 0.9361702127659575,
+      "precision": 0.6666666666666666,
+      "recall": 0.6875,
+      "f1": 0.676923076923077,
+      "roc_auc": 0.9385784932659933,
+      "average_precision": 0.775695843159202,
+      "confusion_matrix": {
+        "true_negative": 572,
+        "false_positive": 22,
+        "false_negative": 20,
+        "true_positive": 44
+      }
+    }
+  },
+  "average_precision_lift_over_held_out_dummy": 7.960545306911164,
+  "error_analysis": {
+    "by_region": {
+      "APAC": {
+        "false_negative": 3,
+        "false_positive": 2
+      },
+      "Europe": {
+        "false_negative": 3,
+        "false_positive": 14
+      },
+      "India": {
+        "false_negative": 2,
+        "false_positive": 8
+      },
+      "North America": {
+        "false_negative": 6,
+        "false_positive": 4
+      }
+    },
+    "by_plan": {
+      "Basic": {
+        "false_negative": 5,
+        "false_positive": 4
+      },
+      "Enterprise": {
+        "false_negative": 4,
+        "false_positive": 4
+      },
+      "Professional": {
+        "false_negative": 5,
+        "false_positive": 20
+      }
+    },
+    "highest_risk_false_positives": [
+      {
+        "customer_id": "CUS002836",
+        "probability": 0.9431812538853189,
+        "region": "Europe",
+        "primary_plan": "Professional"
+      },
+      {
+        "customer_id": "CUS004661",
+        "probability": 0.8975158477113137,
+        "region": "Europe",
+        "primary_plan": "Basic"
+      },
+      {
+        "customer_id": "CUS002161",
+        "probability": 0.8958063760555752,
+        "region": "North America",
+        "primary_plan": "Professional"
+      },
+      {
+        "customer_id": "CUS002324",
+        "probability": 0.8928064364232033,
+        "region": "India",
+        "primary_plan": "Enterprise"
+      },
+      {
+        "customer_id": "CUS003821",
+        "probability": 0.8774217029777047,
+        "region": "Europe",
+        "primary_plan": "Professional"
+      },
+      {
+        "customer_id": "CUS003467",
+        "probability": 0.871294231555985,
+        "region": "Europe",
+        "primary_plan": "Basic"
+      },
+      {
+        "customer_id": "CUS002591",
+        "probability": 0.8468747251005476,
+        "region": "Europe",
+        "primary_plan": "Professional"
+      },
+      {
+        "customer_id": "CUS003535",
+        "probability": 0.8047999723974976,
+        "region": "Europe",
+        "primary_plan": "Professional"
+      },
+      {
+        "customer_id": "CUS002447",
+        "probability": 0.7995837214314756,
+        "region": "India",
+        "primary_plan": "Professional"
+      },
+      {
+        "customer_id": "CUS004119",
+        "probability": 0.7764298895196869,
+        "region": "North America",
+        "primary_plan": "Professional"
+      }
+    ],
+    "lowest_scored_false_negatives": [
+      {
+        "customer_id": "CUS003918",
+        "probability": 0.016949559639374803,
+        "region": "North America",
+        "primary_plan": "Basic"
+      },
+      {
+        "customer_id": "CUS002330",
+        "probability": 0.033121024337139905,
+        "region": "North America",
+        "primary_plan": "Basic"
+      },
+      {
+        "customer_id": "CUS003857",
+        "probability": 0.047464647186576545,
+        "region": "Europe",
+        "primary_plan": "Enterprise"
+      },
+      {
+        "customer_id": "CUS004149",
+        "probability": 0.06576047828706928,
+        "region": "North America",
+        "primary_plan": "Professional"
+      },
+      {
+        "customer_id": "CUS000260",
+        "probability": 0.19280706681930784,
+        "region": "Europe",
+        "primary_plan": "Basic"
+      },
+      {
+        "customer_id": "CUS000404",
+        "probability": 0.19959992529595796,
+        "region": "India",
+        "primary_plan": "Basic"
+      },
+      {
+        "customer_id": "CUS004619",
+        "probability": 0.2319518567647184,
+        "region": "North America",
+        "primary_plan": "Professional"
+      },
+      {
+        "customer_id": "CUS000956",
+        "probability": 0.27903112340664665,
+        "region": "APAC",
+        "primary_plan": "Professional"
+      },
+      {
+        "customer_id": "CUS003378",
+        "probability": 0.31380271443908203,
+        "region": "APAC",
+        "primary_plan": "Professional"
+      },
+      {
+        "customer_id": "CUS000547",
+        "probability": 0.32308421680964433,
+        "region": "North America",
+        "primary_plan": "Enterprise"
+      }
+    ]
+  },
+  "permutation_importance": [
+    {
+      "feature": "sales_observation_count",
+      "importance_mean": 0.3663804810277156,
+      "importance_std": 0.04556395984282093
+    },
+    {
+      "feature": "average_resolution_hours",
+      "importance_mean": 0.20365392220448283,
+      "importance_std": 0.032976759338888106
+    },
+    {
+      "feature": "region",
+      "importance_mean": 0.16459940930061273,
+      "importance_std": 0.03588848636540321
+    },
+    {
+      "feature": "trailing_net_revenue",
+      "importance_mean": 0.11864660283876091,
+      "importance_std": 0.02892947395467532
+    },
+    {
+      "feature": "total_support_tickets",
+      "importance_mean": 0.08914433953016208,
+      "importance_std": 0.013945713389517346
+    },
+    {
+      "feature": "historical_renewals",
+      "importance_mean": 0.06576607910774822,
+      "importance_std": 0.030620099168515647
+    },
+    {
+      "feature": "days_to_renewal",
+      "importance_mean": 0.04063304001911347,
+      "importance_std": 0.009657217447463165
+    },
+    {
+      "feature": "historical_discount_rate",
+      "importance_mean": 0.037472262698316244,
+      "importance_std": 0.010652586736659645
+    },
+    {
+      "feature": "monthly_contract_value",
+      "importance_mean": 0.028707493176086188,
+      "importance_std": 0.01271677395077159
+    },
+    {
+      "feature": "average_satisfaction",
+      "importance_mean": 0.019106144353757792,
+      "importance_std": 0.010570358602730657
+    },
+    {
+      "feature": "active_subscription_count",
+      "importance_mean": 0.018776022991780855,
+      "importance_std": 0.010008023072479274
+    },
+    {
+      "feature": "trailing_support_tickets",
+      "importance_mean": 0.007666603818073325,
+      "importance_std": 0.002823254840305857
+    },
+    {
+      "feature": "customer_tenure_days",
+      "importance_mean": 0.0047914017756984645,
+      "importance_std": 0.005702174558022499
+    },
+    {
+      "feature": "average_historical_revenue",
+      "importance_mean": 0.004393940374736172,
+      "importance_std": 0.0103142112605407
+    },
+    {
+      "feature": "acquisition_channel",
+      "importance_mean": 0.0030776521487638903,
+      "importance_std": 0.002947249843596681
+    },
+    {
+      "feature": "total_seats",
+      "importance_mean": 0.001989569732848903,
+      "importance_std": 0.003475208187280805
+    },
+    {
+      "feature": "company_size",
+      "importance_mean": 0.0018723338014400015,
+      "importance_std": 0.004491433910324778
+    },
+    {
+      "feature": "has_support_history",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "is_enterprise",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
+    },
+    {
+      "feature": "satisfaction_response_rate",
+      "importance_mean": -0.00010017168449218128,
+      "importance_std": 2.8956024603058708e-05
+    },
+    {
+      "feature": "historical_net_revenue",
+      "importance_mean": -0.0006384268058226839,
+      "importance_std": 0.007799617089097861
+    },
+    {
+      "feature": "industry",
+      "importance_mean": -0.0008300794560381214,
+      "importance_std": 0.0014614407430793572
+    },
+    {
+      "feature": "primary_plan",
+      "importance_mean": -0.009170858068041896,
+      "importance_std": 0.008167042547637645
+    }
+  ],
+  "logistic_coefficients": [],
+  "limitations": [
+    "Predictions are probabilities for a synthetic cohort, not certainties.",
+    "A random customer split estimates within-period generalization, not temporal drift.",
+    "The target concerns subscriptions active at the snapshot only.",
+    "Feature importance describes predictive contribution, not causation.",
+    "Probability calibration is not separately evaluated in Phase 7."
+  ]
+}

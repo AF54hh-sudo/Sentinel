@@ -70,7 +70,7 @@ The data is synthetic and cannot establish real-world causality. Currency is gen
 
 ## Project Structure
 
-Production code lives in `src/sentinel`, generated CSVs in `data/generated`, the fictional retrieval corpus in `data/documents`, scripts in `scripts`, checks in `tests`, notebooks in `notebooks`, and technical notes in `docs`. Trained artifacts and the visualization gallery are regenerated into the git-ignored `models` directory.
+Production code lives in `src/sentinel`, generated CSVs in `data/generated`, the fictional retrieval corpus in `data/documents`, scripts in `scripts`, checks in `tests`, notebooks in `notebooks`, and technical notes in `docs`. The repository includes the synthetic CSVs and lightweight analytical reports required by the hosted dashboard; fitted estimators and the visualization gallery remain reproducible and git-ignored.
 
 ## Installation
 
@@ -102,7 +102,7 @@ python scripts/build_report.py "Why did Q2 profit fall?" --with-documents
 pytest
 ```
 
-Generated CSVs and trained model artifacts are intentionally git-ignored and reproducible with seed 42.
+The hosted demo includes reproducible seed-42 synthetic CSVs and lightweight dashboard evidence. Full fitted estimators, generated diagnostic reports, and the visualization gallery remain intentionally git-ignored.
 
 ## Skills Demonstrated
 

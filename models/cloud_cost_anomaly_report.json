@@ -1,0 +1,190 @@
+{
+  "company": "AMX Tech",
+  "configuration": {
+    "metric": "gpu_cost",
+    "local_window_days": 29,
+    "iqr_multiplier": 1.5,
+    "strong_iqr_multiplier": 3.0,
+    "isolation_contamination": 0.01,
+    "isolation_estimators": 300,
+    "random_state": 42
+  },
+  "data": {
+    "start_date": "2023-01-01",
+    "end_date": "2024-12-31",
+    "daily_observations": 731,
+    "source_rows": 2924,
+    "aggregation": "sum across regions to one company-wide daily observation"
+  },
+  "methodology": {
+    "baseline": "Centered 29-day rolling median for retrospective local-level adjustment.",
+    "iqr": "Standard 1.5-IQR candidates and 3.0-IQR strong outliers on the ratio of observed cost to its robust local baseline.",
+    "isolation_forest": "Isolation Forest on the log local-cost ratio with a 1.0% contamination prior.",
+    "final_rule": "Strong anomaly requires agreement between the outer IQR fence and Isolation Forest."
+  },
+  "iqr_ratio_bounds": {
+    "ratio_q1": 0.9691706739550736,
+    "ratio_q3": 1.0364724124049707,
+    "ratio_iqr": 0.06730173844989706,
+    "ratio_lower": 0.868218066280228,
+    "ratio_upper": 1.1374250200798164,
+    "strong_ratio_lower": 0.7672654586053824,
+    "strong_ratio_upper": 1.2383776277546619
+  },
+  "counts": {
+    "iqr_candidates": 13,
+    "strong_iqr_outliers": 7,
+    "isolation_forest_anomalies": 8,
+    "final_strong_anomalies": 7
+  },
+  "strong_anomalies": [
+    {
+      "date": "2024-05-13",
+      "metric": "gpu_cost",
+      "normal_range_lower": 62750.63438401673,
+      "normal_range_upper": 82207.62081127275,
+      "observed_value": 150767.04,
+      "anomaly_score": 0.09564278297418982,
+      "interpretation": "Strong gpu_cost anomaly: 108.6% above the robust local median; both the outer IQR fence and Isolation Forest agree."
+    },
+    {
+      "date": "2024-05-14",
+      "metric": "gpu_cost",
+      "normal_range_lower": 62048.43697637061,
+      "normal_range_upper": 81287.69420353259,
+      "observed_value": 152954.72,
+      "anomaly_score": 0.10013754086983251,
+      "interpretation": "Strong gpu_cost anomaly: 114.0% above the robust local median; both the outer IQR fence and Isolation Forest agree."
+    },
+    {
+      "date": "2024-05-15",
+      "metric": "gpu_cost",
+      "normal_range_lower": 62048.43697637061,
+      "normal_range_upper": 81287.69420353259,
+      "observed_value": 162978.55,
+      "anomaly_score": 0.11129112641535088,
+      "interpretation": "Strong gpu_cost anomaly: 128.0% above the robust local median; both the outer IQR fence and Isolation Forest agree."
+    },
+    {
+      "date": "2024-05-16",
+      "metric": "gpu_cost",
+      "normal_range_lower": 61816.60538831246,
+      "normal_range_upper": 80983.97897467087,
+      "observed_value": 142768.87,
+      "anomaly_score": 0.09024397677739182,
+      "interpretation": "Strong gpu_cost anomaly: 100.5% above the robust local median; both the outer IQR fence and Isolation Forest agree."
+    },
+    {
+      "date": "2024-05-17",
+      "metric": "gpu_cost",
+      "normal_range_lower": 61816.60538831246,
+      "normal_range_upper": 80983.97897467087,
+      "observed_value": 162650.30000000002,
+      "anomaly_score": 0.11186223261273043,
+      "interpretation": "Strong gpu_cost anomaly: 128.4% above the robust local median; both the outer IQR fence and Isolation Forest agree."
+    },
+    {
+      "date": "2024-05-18",
+      "metric": "gpu_cost",
+      "normal_range_lower": 61816.60538831246,
+      "normal_range_upper": 80983.97897467087,
+      "observed_value": 135918.56,
+      "anomaly_score": 0.0883904916193966,
+      "interpretation": "Strong gpu_cost anomaly: 90.9% above the robust local median; both the outer IQR fence and Isolation Forest agree."
+    },
+    {
+      "date": "2024-05-19",
+      "metric": "gpu_cost",
+      "normal_range_lower": 62048.43697637061,
+      "normal_range_upper": 81287.69420353259,
+      "observed_value": 143863.12,
+      "anomaly_score": 0.09154390581764482,
+      "interpretation": "Strong gpu_cost anomaly: 101.3% above the robust local median; both the outer IQR fence and Isolation Forest agree."
+    }
+  ],
+  "limitations": [
+    "The centered baseline is retrospective and uses observations on both sides of a date.",
+    "The contamination rate is an analytical prior, not a learned business frequency.",
+    "Daily aggregation can hide offsetting or region-specific anomalies.",
+    "Detector agreement identifies unusual values, not their operational cause.",
+    "Results come from synthetic data and do not establish production performance."
+  ],
+  "evaluation_only_ground_truth": {
+    "iqr_anomaly": {
+      "flag": "iqr_anomaly",
+      "expected_period": "2024-05-13/2024-05-19",
+      "precision": 0.5384615384615384,
+      "recall": 1.0,
+      "f1": 0.7000000000000001,
+      "confusion_matrix": {
+        "true_negative": 718,
+        "false_positive": 6,
+        "false_negative": 0,
+        "true_positive": 7
+      },
+      "detected_dates": [
+        "2023-08-04",
+        "2023-12-11",
+        "2024-02-05",
+        "2024-05-13",
+        "2024-05-14",
+        "2024-05-15",
+        "2024-05-16",
+        "2024-05-17",
+        "2024-05-18",
+        "2024-05-19",
+        "2024-06-03",
+        "2024-06-18",
+        "2024-06-27"
+      ],
+      "missed_expected_dates": []
+    },
+    "isolation_forest_anomaly": {
+      "flag": "isolation_forest_anomaly",
+      "expected_period": "2024-05-13/2024-05-19",
+      "precision": 0.875,
+      "recall": 1.0,
+      "f1": 0.9333333333333333,
+      "confusion_matrix": {
+        "true_negative": 723,
+        "false_positive": 1,
+        "false_negative": 0,
+        "true_positive": 7
+      },
+      "detected_dates": [
+        "2024-02-05",
+        "2024-05-13",
+        "2024-05-14",
+        "2024-05-15",
+        "2024-05-16",
+        "2024-05-17",
+        "2024-05-18",
+        "2024-05-19"
+      ],
+      "missed_expected_dates": []
+    },
+    "strong_anomaly": {
+      "flag": "strong_anomaly",
+      "expected_period": "2024-05-13/2024-05-19",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion_matrix": {
+        "true_negative": 724,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_positive": 7
+      },
+      "detected_dates": [
+        "2024-05-13",
+        "2024-05-14",
+        "2024-05-15",
+        "2024-05-16",
+        "2024-05-17",
+        "2024-05-18",
+        "2024-05-19"
+      ],
+      "missed_expected_dates": []
+    }
+  }
+}

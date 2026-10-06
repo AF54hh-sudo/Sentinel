@@ -1,0 +1,97 @@
+{
+  "company": "AMX Tech",
+  "configuration": {
+    "validation_months": 6,
+    "test_months": 6,
+    "moving_average_window": 3,
+    "future_horizon_months": 3,
+    "minimum_initial_training_months": 12,
+    "damped_trend": true
+  },
+  "series": {
+    "metric": "monthly net revenue",
+    "start_month": "2023-01-01",
+    "end_month": "2024-12-01",
+    "observations": 24,
+    "overall_growth": 0.1471466526697538,
+    "lag_12_correlation": 0.9879275564443942
+  },
+  "protocol": {
+    "initial_training_period": "2023-01-01/2023-12-01",
+    "validation_period": "2024-01-01/2024-06-01",
+    "test_period": "2024-07-01/2024-12-01",
+    "evaluation": "Expanding-window, one-step-ahead forecasts. Each prediction uses only months observed before its target month.",
+    "selection": "Lowest validation WAPE, with validation MAE as a tie-breaker. The method is fixed before the test period is scored."
+  },
+  "candidate_definitions": {
+    "naive": "Previous observed month.",
+    "moving_average": "Mean of the previous 3 observed months.",
+    "exponential_smoothing": "Additive damped trend with estimated initialization and no seasonal term."
+  },
+  "validation_metrics": {
+    "naive": {
+      "mae": 259972.85000000024,
+      "rmse": 320785.50138096797,
+      "wape": 0.0103249714123
+    },
+    "moving_average": {
+      "mae": 575203.3283333326,
+      "rmse": 645322.2127523392,
+      "wape": 0.022844531347413637
+    },
+    "exponential_smoothing": {
+      "mae": 158527.40602399656,
+      "rmse": 217061.8808469377,
+      "wape": 0.0062960071994588584
+    }
+  },
+  "selected_method": "exponential_smoothing",
+  "test_metrics": {
+    "naive": {
+      "mae": 174460.60000000024,
+      "rmse": 208741.21688329795,
+      "wape": 0.0068691765903205705
+    },
+    "moving_average": {
+      "mae": 233956.4755555559,
+      "rmse": 290482.1177137928,
+      "wape": 0.00921175523321672
+    },
+    "exponential_smoothing": {
+      "mae": 148020.09431764545,
+      "rmse": 163288.3204274773,
+      "wape": 0.005828113435261667
+    }
+  },
+  "selected_test_metrics": {
+    "mae": 148020.09431764545,
+    "rmse": 163288.3204274773,
+    "wape": 0.005828113435261667
+  },
+  "test_wape_improvement_over_naive": 0.15155574199764735,
+  "future_forecast": [
+    {
+      "month": "2025-01-01",
+      "horizon_month": 1,
+      "forecast_net_revenue": 26233752.510555804
+    },
+    {
+      "month": "2025-02-01",
+      "horizon_month": 2,
+      "forecast_net_revenue": 26524830.320361324
+    },
+    {
+      "month": "2025-03-01",
+      "horizon_month": 3,
+      "forecast_net_revenue": 26776086.283047244
+    }
+  ],
+  "limitations": [
+    "Only 24 monthly observations are available, limiting structural complexity.",
+    "Annual seasonality is plausible but two cycles are insufficient for a stable seasonal model.",
+    "Walk-forward results estimate next-month updates, not a six-month forecast made once.",
+    "Future values are point forecasts without calibrated prediction intervals.",
+    "Synthetic history cannot establish real-world forecast performance.",
+    "Known future pricing, pipeline, macroeconomic, and operational drivers are absent."
+  ]
+}

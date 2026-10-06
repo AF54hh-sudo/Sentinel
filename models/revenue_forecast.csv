@@ -1,0 +1,4 @@
+month,method,horizon_month,forecast_net_revenue
+2025-01-01,exponential_smoothing,1,26233752.510555804
+2025-02-01,exponential_smoothing,2,26524830.320361324
+2025-03-01,exponential_smoothing,3,26776086.283047244
